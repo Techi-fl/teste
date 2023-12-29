@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bot do Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #messages {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mensagens do Bot do Telegram</h1>
+    <div id="messages"></div>
+
+    <script>
+       // Substitua 'YOUR_BOT_TOKEN' pelo token do seu bot
+var token = '6696140530:AAFlTkgsIMupH7i4SxuYfxn0R4P5KivIqX0N';
+
+// Função para buscar as mensagens do bot
+function fetchMessages() {
+    fetch('https://api.telegram.org/bot' + token + '/getUpdates')
+        .then(response => response.json())
+        .then(data => {
+            var messages = data.result.map(update => update.message.text);
+            document.getElementById('messages').innerHTML = messages.join('<br>');
+        })
+        .catch(error => console.error(error));
+}
+
+// Buscar as mensagens a cada 5 segundos
+setInterval(fetchMessages, 5000);
+
+// Verificar se avaLocal.descri existe e criar um elemento <p> para cada item
+if (avaLocal && avaLocal.descri) {
+    avaLocal.descri.forEach(item => {
+        var p = document.createElement('p');
+        p.textContent = item;
+        document.body.appendChild(p);
+    });
+}
+
+    </script>
+</body>
+</html>
